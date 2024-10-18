@@ -3,12 +3,17 @@ project:
   output-dir: docs
 
 website:
-  title: "nmoraescommit.github.io"
+  title: "nmoraescommit"
   navbar:
+    title: false
     left:
       - href: index.qmd
         text: Home
       - about.qmd
+  page-footer:
+    background: light
+    left: Copyright 2024, Naomi Moraes
+    right: This website is built with {{< fa brands github title="The GitHub octocat logo" >}}
 
 format:
   html:
