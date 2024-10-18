@@ -1,3 +1,19 @@
 ---
-title: "nmoraescommit.github.io"
+title: "N Moraes"
+image: media_headshot.jpeg
+about:
+  template: jolla
+  image-shape: round
+  image-width: 17em
+  links:
+    - text: LinkedIn
+      icon: linkedin
+      href: https://www.linkedin.com/in/naomi-m-65a25819a?trk=people-guest_people_search-card
+    - text: GitHub
+      icon: github
+      href: https://github.com/nmoraescommit
+    - text: Email
+      href: mailto:don'temailmeplease
 ---
+
+Having lived in multiple states and abroad, Naomi Moraes has appreciated the global interconnectivity of local environmental issues and solutions, from an early age. Her interest in mitigating climate change impacts led her to complete her undergraduate degree in Economics and Environmental Studies at the University of Michigan, Ann Arbor, where she graduated with a Bachelor of Arts in 2021.
