@@ -10,6 +10,7 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+      - blog.qmd
   page-footer:
     background: light
     left: Copyright 2024, Naomi Moraes
