@@ -15,12 +15,11 @@ website:
     background: light
     left: Copyright 2024, Naomi Moraes
     right: This website is built with {{< fa brands github title="The GitHub octocat logo" >}}
-
 format:
   html:
-    theme: cosmo
-    css: styles.css
-    toc: true
-
+    theme: styles.scss
+    mainfont: Montserrat
+    toc: false
+    page-layout: full
 editor: visual
 
