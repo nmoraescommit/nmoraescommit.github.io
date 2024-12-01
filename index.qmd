@@ -1,8 +1,8 @@
 ---
-title: "N Moraes"
+title: "Naomi Moraes"
 image: media_headshot.jpeg
 about:
-  template: jolla
+  template: trestles
   image-shape: round
   image-width: 17em
   links:
@@ -15,5 +15,6 @@ about:
     - text: Email
       href: mailto:don'temailmeplease
 ---
-
+::: darkbrown-text
 Having lived in multiple states and abroad, Naomi Moraes has appreciated the global interconnectivity of local environmental issues and solutions, from an early age. Her interest in mitigating climate change impacts led her to complete her undergraduate degree in Economics and Environmental Studies at the University of Michigan, Ann Arbor, where she graduated with a Bachelor of Arts in 2021.
+:::
