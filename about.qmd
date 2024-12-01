@@ -2,8 +2,6 @@
 title: "About"
 ---
 
-About this site
+About this site:
 
-```{r}
-1 + 1
-```
+This is a website I'm making for grad school. I will be posting professional repositories and the like here!

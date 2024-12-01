@@ -3,7 +3,7 @@ title: "Naomi Moraes"
 image: media_headshot.jpeg
 about:
   template: trestles
-  image-shape: round
+  image-shape: rounded
   image-width: 17em
   links:
     - text: LinkedIn
@@ -18,3 +18,4 @@ about:
 ::: darkbrown-text
 Having lived in multiple states and abroad, Naomi Moraes has appreciated the global interconnectivity of local environmental issues and solutions, from an early age. Her interest in mitigating climate change impacts led her to complete her undergraduate degree in Economics and Environmental Studies at the University of Michigan, Ann Arbor, where she graduated with a Bachelor of Arts in 2021.
 :::
+
