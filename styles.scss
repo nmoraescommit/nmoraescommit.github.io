@@ -8,17 +8,17 @@ $barlow-condensed: "Barlow Condensed", sans-serif;
 $montserrat: "Montserrat", sans-serif;
 
 // Colors
-$dark_green: #656D4A;
-$dark_brown: #674636;
-$cream: #FFF8E8;
+$rusty_rose: #7E4E55;
+$dark_brown: #2F2227;
+$light_pink: #FFF1F0;
 $yellow: #F3CA52;
 
 // Quarto Sass Variables
-$body-bg: $cream; // body background
-$navbar-bg: $dark_green; // navbar background
-$navbar-fg: $cream;  // navbar text
+$body-bg: $light_pink; // body background
+$navbar-bg: $rusty_rose; // navbar background
+$navbar-fg: $light_pink;  // navbar text
 $navbar-hl: $yellow;  // text color for page you are on
-$footer-bg: $cream;  // footer background
+$footer-bg: $light_pink;  // footer background
 $footer-fg: $dark_brown;  // footer text
 
 /*-- scss:rules --*/
@@ -45,7 +45,7 @@ h1, h2 {
   }
   
   .center-green {
-    color: $dark_green;
+    color: $rusty_rose;
     text-align: center;
   }
 
