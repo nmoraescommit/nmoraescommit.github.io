@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "No matching items"
+    "text": "Thomas Fire SB\n\n\n\nPython\n\n\nMEDS\n\n\nGeospatial\n\n\n\na short catchy description of the blog post\n\n\n\nNaomi Moraes\n\n\nOct 18, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nblog post title\n\n\n\nQuarto\n\n\nMEDS\n\n\nSanFran\n\n\n\na short catchy description of the blog post\n\n\n\nNaomi Moraes\n\n\nOct 18, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -19,5 +19,89 @@
     "title": "Naomi Moraes",
     "section": "",
     "text": "Having lived in multiple states and abroad, Naomi Moraes has appreciated the global interconnectivity of local environmental issues and solutions, from an early age. Her interest in mitigating climate change impacts led her to complete her undergraduate degree in Economics and Environmental Studies at the University of Michigan, Ann Arbor, where she graduated with a Bachelor of Arts in 2021."
+  },
+  {
+    "objectID": "blog/2024-12-01-thomas-fire-sb/Thomas_Fire_Blog_Post.html",
+    "href": "blog/2024-12-01-thomas-fire-sb/Thomas_Fire_Blog_Post.html",
+    "title": "nmoraescommit",
+    "section": "",
+    "text": "# Import Libraries\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Read in data\naqi_17 = pd.read_csv('https://aqs.epa.gov/aqsweb/airdata/daily_aqi_by_county_2017.zip', compression = 'zip')\naqi_18 = pd.read_csv('https://aqs.epa.gov/aqsweb/airdata/daily_aqi_by_county_2018.zip', compression = 'zip')\n\n# Concatenate both dataframes\naqi = pd.concat([aqi_17, aqi_18])\n\n# Simplify column names\naqi.columns = (aqi.columns\n                  .str.lower()\n                  .str.replace(' ','_')\n                )\n\n# Create filter Santa Barbara df with dropped columns\naqi_sb = aqi[aqi['county_name'] == 'Santa Barbara']\naqi_sb = aqi_sb.drop(columns = ['state_name','county_name','state_code','county_code'], axis = 1)\n               \n# Change 'date' to datetime and set to index\naqi_sb.date = pd.to_datetime(aqi_sb['date'])\naqi_sb = aqi_sb.set_index('date')\n               \n# Calculate AQI rolling average over 5 days\nrolling_average = aqi_sb['aqi'].rolling('5D').mean()\n               \n# Create column with new variable 'rolling_variable'\naqi_sb['five_day_average'] = rolling_average\n               \n# Create plot with daily AQI and 5-day averages\ndaily_aqi_plot = aqi_sb[['aqi','five_day_average']].plot(title = 'Daily and 5-Day Average AQI in Santa Barbara County',\n                                  xlabel = 'Date',\n                                  ylabel = 'AQI')"
+  },
+  {
+    "objectID": "posts/2024-12-01-thomas-fire-sb/Thomas_Fire_Blog_Post.html",
+    "href": "posts/2024-12-01-thomas-fire-sb/Thomas_Fire_Blog_Post.html",
+    "title": "nmoraescommit",
+    "section": "",
+    "text": "# Import Libraries\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\n\n# Read in data\naqi_17 = pd.read_csv('https://aqs.epa.gov/aqsweb/airdata/daily_aqi_by_county_2017.zip', compression = 'zip')\naqi_18 = pd.read_csv('https://aqs.epa.gov/aqsweb/airdata/daily_aqi_by_county_2018.zip', compression = 'zip')\n\n# Concatenate both dataframes\naqi = pd.concat([aqi_17, aqi_18])\n\n# Simplify column names\naqi.columns = (aqi.columns\n                  .str.lower()\n                  .str.replace(' ','_')\n                )\n\n# Create filter Santa Barbara df with dropped columns\naqi_sb = aqi[aqi['county_name'] == 'Santa Barbara']\naqi_sb = aqi_sb.drop(columns = ['state_name','county_name','state_code','county_code'], axis = 1)\n               \n# Change 'date' to datetime and set to index\naqi_sb.date = pd.to_datetime(aqi_sb['date'])\naqi_sb = aqi_sb.set_index('date')\n               \n# Calculate AQI rolling average over 5 days\nrolling_average = aqi_sb['aqi'].rolling('5D').mean()\n               \n# Create column with new variable 'rolling_variable'\naqi_sb['five_day_average'] = rolling_average\n               \n# Create plot with daily AQI and 5-day averages\ndaily_aqi_plot = aqi_sb[['aqi','five_day_average']].plot(title = 'Daily and 5-Day Average AQI in Santa Barbara County',\n                                  xlabel = 'Date',\n                                  ylabel = 'AQI')"
+  },
+  {
+    "objectID": "posts/2024-10-18-my-first-post/index.html",
+    "href": "posts/2024-10-18-my-first-post/index.html",
+    "title": "blog post title",
+    "section": "",
+    "text": "I’m going to insert a footnote here1"
+  },
+  {
+    "objectID": "posts/2024-10-18-my-first-post/index.html#this-is-my-first-section",
+    "href": "posts/2024-10-18-my-first-post/index.html#this-is-my-first-section",
+    "title": "blog post title",
+    "section": "",
+    "text": "I’m going to insert a footnote here1"
+  },
+  {
+    "objectID": "posts/2024-10-18-my-first-post/index.html#this-is-my-second",
+    "href": "posts/2024-10-18-my-first-post/index.html#this-is-my-second",
+    "title": "blog post title",
+    "section": "This is my second",
+    "text": "This is my second\nHere’s my next paragraph2\nI’m citing me(online?)"
+  },
+  {
+    "objectID": "posts/2024-10-18-my-first-post/index.html#cite-a-google-article-now",
+    "href": "posts/2024-10-18-my-first-post/index.html#cite-a-google-article-now",
+    "title": "blog post title",
+    "section": "Cite a google article now",
+    "text": "Cite a google article now\nHere is more rando text- this is a journal article cite now (Gaynor et al. 2022)"
+  },
+  {
+    "objectID": "posts/2024-10-18-my-first-post/index.html#footnotes",
+    "href": "posts/2024-10-18-my-first-post/index.html#footnotes",
+    "title": "blog post title",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nHere is a new footnote↩︎\nHere is my second footnote↩︎"
+  },
+  {
+    "objectID": "posts/2024-12-01-thomas-fire-sb/index.html",
+    "href": "posts/2024-12-01-thomas-fire-sb/index.html",
+    "title": "Thomas Fire SB",
+    "section": "",
+    "text": "I’m going to insert a footnote here1"
+  },
+  {
+    "objectID": "posts/2024-12-01-thomas-fire-sb/index.html#this-is-my-first-section",
+    "href": "posts/2024-12-01-thomas-fire-sb/index.html#this-is-my-first-section",
+    "title": "Thomas Fire SB",
+    "section": "",
+    "text": "I’m going to insert a footnote here1"
+  },
+  {
+    "objectID": "posts/2024-12-01-thomas-fire-sb/index.html#this-is-my-second",
+    "href": "posts/2024-12-01-thomas-fire-sb/index.html#this-is-my-second",
+    "title": "Thomas Fire SB",
+    "section": "This is my second",
+    "text": "This is my second\nHere’s my next paragraph2\nI’m citing me[@online]"
+  },
+  {
+    "objectID": "posts/2024-12-01-thomas-fire-sb/index.html#cite-a-google-article-now",
+    "href": "posts/2024-12-01-thomas-fire-sb/index.html#cite-a-google-article-now",
+    "title": "Thomas Fire SB",
+    "section": "Cite a google article now",
+    "text": "Cite a google article now\nHere is more rando text- this is a journal article cite now [@gaynor2022]"
+  },
+  {
+    "objectID": "posts/2024-12-01-thomas-fire-sb/index.html#footnotes",
+    "href": "posts/2024-12-01-thomas-fire-sb/index.html#footnotes",
+    "title": "Thomas Fire SB",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nHere is a new footnote↩︎\nHere is my second footnote↩︎"
   }
 ]

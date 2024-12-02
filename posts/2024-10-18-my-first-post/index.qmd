@@ -9,10 +9,10 @@ date: 2024-10-18
 categories: [Quarto, MEDS,SanFran]
 toc: true
 bibliography: references.bib 
-image: horst-penguins.png # put in folder as with csl:
+image: penguins.jpeg # put in folder as with csl:
 citation:
   url: https://nmoraescommit.github.io/blog/2024-10-18-my-first-post
-draft: true
+draft: false
 draft-mode: visible
 ---
 

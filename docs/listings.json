@@ -1,6 +1,9 @@
 [
   {
     "listing": "/blog.html",
-    "items": []
+    "items": [
+      "/posts/2024-12-01-thomas-fire-sb/index.html",
+      "/posts/2024-10-18-my-first-post/index.html"
+    ]
   }
 ]

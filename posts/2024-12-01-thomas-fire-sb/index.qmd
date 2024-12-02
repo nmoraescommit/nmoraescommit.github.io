@@ -1,0 +1,34 @@
+---
+title: "Thomas Fire SB"
+description: "a short catchy description of the blog post"
+author:
+  - name: Naomi Moraes
+    url: https://nmoraescommit.github.io/
+    affilitation-url: https://bren.ucsb.edu/masters-programs/master-environmental-data-science
+date: 2024-10-18
+categories: [Python, MEDS, Geospatial]
+toc: true
+image: ThomasFire-coverpic.png # put in folder as with csl:
+citation:
+  url: https://nmoraescommit.github.io/blog/2024-12-01-thomas-fire-sb
+draft: false
+draft-mode: visible
+---
+
+## This is my first section
+
+I'm going to insert a footnote here[^1]
+
+[^1]: Here is a new footnote
+
+## This is my second
+
+Here's my next paragraph[^2]
+
+[^2]: Here is my second footnote
+
+I'm citing me[@online]
+
+## Cite a google article now
+
+Here is more rando text- this is a journal article cite now [@gaynor2022]
