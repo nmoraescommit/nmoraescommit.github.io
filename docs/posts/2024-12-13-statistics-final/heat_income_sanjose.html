@@ -23,6 +23,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -109,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page">
+    <div class="quarto-title column-page-left">
       <h1 class="title">Investigating Temperature and Income in San Jose</h1>
                   <div>
         <div class="description">
@@ -124,7 +158,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
     
   
-  <div class="quarto-title-meta column-page">
+  <div class="quarto-title-meta column-page-left">
 
       <div>
       <div class="quarto-title-meta-heading">Author</div>
@@ -147,68 +181,213 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning">Data Cleaning</a></li>
+  <li><a href="#data-processing" id="toc-data-processing" class="nav-link" data-scroll-target="#data-processing">Data Processing</a></li>
+  <li><a href="#data-visualization-and-analysis" id="toc-data-visualization-and-analysis" class="nav-link" data-scroll-target="#data-visualization-and-analysis">Data Visualization and Analysis</a>
+  <ul class="collapse">
+  <li><a href="#maximum-daily-temperature-data-distribution" id="toc-maximum-daily-temperature-data-distribution" class="nav-link" data-scroll-target="#maximum-daily-temperature-data-distribution">Maximum Daily Temperature Data Distribution</a></li>
+  <li><a href="#proportion-of-hot-days-by-location" id="toc-proportion-of-hot-days-by-location" class="nav-link" data-scroll-target="#proportion-of-hot-days-by-location">Proportion of Hot Days by Location</a></li>
+  <li><a href="#mean-income-and-station-location" id="toc-mean-income-and-station-location" class="nav-link" data-scroll-target="#mean-income-and-station-location">Mean Income and Station Location</a></li>
+  </ul></li>
+  <li><a href="#conclusion-bias-and-limitations" id="toc-conclusion-bias-and-limitations" class="nav-link" data-scroll-target="#conclusion-bias-and-limitations">Conclusion, Bias, and Limitations</a></li>
+  <li><a href="#text-references" id="toc-text-references" class="nav-link" data-scroll-target="#text-references">Text References</a></li>
+  <li><a href="#data-access" id="toc-data-access" class="nav-link" data-scroll-target="#data-access">Data Access</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
 
-<ul>
-<li><p>My starting point was quite ambitious - especially for the time span I had allotted myself for this project. A mere 2 weeks! Gathering and cleaning data, creating code to process it, analyzing and visualizing the results - to look at incomes and temperatures around the entirety of the Bay Area was no small task. Furthermore, due to the inland spread of certain counties, like Alameda, inland, there were areas where there would naturally be higher temperatures that may skew the research.&nbsp;</p></li>
-<li><p>Thus, looking at my available data sources of the NOAA local temperature data as well as the data made available by the tidycensus library in R, I decided to zoom in on the city of San Jose, in the South Bay.</p></li>
-<li><p>Through a series of questions, I wanted to get an introductory understanding of the relationship between temperature and median household income, in San Jose, during the years 2005 - 2009. According to articles I have read [CITE COME ARTICLES], there is a “{QUOTE]” - relationship between heat and income. (And maybe disproportionate care between poor and heat?” Through data analysis, I wanted to observe if these assumptions held up in the specific area I was investigating.&nbsp;</p></li>
-<li><p>After cleaning my temperature data and income data, I was left with the following independent variables: HourlyDryBulbTemperature (which represented the temperature taken during the hour (24 hours or not?)), and (average?) median household income per census tract (in what kind of dollars).</p></li>
-<li><p>To provide a summary of the median household income of the census tracts surrounding each of the stations, I used geospatial tools in R. I created geographic points for each of the stations and created a buffer zone of 4500 m (creating a circle around each point of x DIAMETER). Overlaying these polygons onto the Santa Clara census tract shapefile, I used the [NAME] library to find where the buffered zones of each station&nbsp; intersected with the census tract shapefiles. Using the GEOIDs of the intersected census tracts as the joining feature, I created a new joint data table of the identified census tracts and their respective median incomes, by joining them to the census [NAME] ACS 5 year.</p></li>
-<li><p>Then, after finding the respective means of the median incomes surrounding each station, I joined this information to the finalized data frame. I repeated this process for 4 times - with ACS 5 year data for the years 2009, 2014, 2019, and 2022 (as the data for 2023 was unavailable) as well as with the census tract shapefiles for the same years. (I did this to ensure that changing census tracts boundaries and labels over the time-period, would not skew the resulting mean, median income household data surrounding each station.)</p></li>
-<li><p>The resulting data frame, required for the analysis, contained the mean, median income surrounding each station for a given year. Given the time constraints, I assumed that the income variable would be applicable to a five year time period (e.g.&nbsp;the 2009 ACS median household income would be applied to the years of 2005 to 2009.)</p></li>
-<li><p>I also summarised the temperature data, by selecting for the highest temperature within the day in order to find the maximum daily temperature over the year 2005 - 2000. Furthermore, I found the days where the temperature was above 90 degrees celsius, over the time period, for all stations.</p></li>
-</ul>
-<!-- -->
-<ul>
-<li><p>Describe your data. Where did you access it? What are its spatial and temporal features? What are its limitations? What do you know about the sampling strategy and what biases that may introduce? If helpful, you can use a histogram, scatterplot, or summary statistics table to describe your data.</p>
-<ul>
-<li><p>Temperature data across the city of San Jose, was retrieved from the National Centers for Environmental Infomation, National Oceanic and Atmospheric Administration (NOAA) climate data online, specifically their local climatological data. Selecting the county of interest as Santa Clara, we&nbsp;&nbsp;</p></li>
-<li><p>This was because there were three stations, quite nicely spread out on a diagonal diameter of the city, which allowed me to gather a temperature data I believed to be representative of a cross-section of the city. The time-range for the recorded historical temperatures included&nbsp; the time-range that I wanted to observe, 2010 - 2024.</p></li>
-<li></li>
-</ul></li>
-<li><p>Summarize your results visually and in words. Show us your results in figure(s) and/or table(s) that are carefully labeled and captioned. Describe in the text (and orally when presenting) what you found, and how these results either do or do not help you answeryour question.</p></li>
-<li><p>Every year, around the months of July through to August, I have noticed an uptick in news articles and government advisories cautioning people about the dangers of increasingly frequent heat waves. (Heatwaves can cause health-related problems, like heat strokes, but it can also increase the burden on water, energy, and transportation services - causing blackouts and gridlock that further exacerbate the problem. (Heatwaves, n.d.)) As a Bay Area native, and a burgeoning data scientist, with an interest in environmental justice, I wanted to explore the relationship between temperature, income, and location in the Bay Area. (This blog post is an extension of my final project presentation for grad school, for the course EDS222.) Through this investigation, I pose multiple questions to try and get a holistic understanding of the topic.</p></li>
-<li><p>My starting point was quite ambitious - especially for the time span I had allotted myself for this project. A mere 2 weeks! Gathering and cleaning data, creating code to process it, analyzing and visualizing the results - to look at incomes and temperatures around the entirety of the Bay Area was no small task. Furthermore, due to the inland spread of certain counties, like Alameda, inland, there were areas where there would naturally be higher temperatures that may skew the research.&nbsp;</p></li>
-<li><p>Thus, looking at my data sources of the NOAA local temperature data as well as the data made available by the tidycensus library in R, I decided to zoom in on the city of San Jose, in the South Bay.</p></li>
-<li><p>Temperature data across the city of San Jose, was retrieved from the National Centers for Environmental Information, National Oceanic and Atmospheric Administration (NOAA). I utilised the climate data online tool, to pull local climatological data from my county of interest - Santa Clara. While there are a total of four stations in the area, the three stations I found the most promising in terms of recorded time range, location, and geographic relevance were the Moffett Federal Airfield, San Jose Mineta National Airport, and the Reid-Hillview Airport.</p></li>
-<li><p>This was because there were three stations, quite nicely spread out on a diagonal diameter of the city, which allowed me to gather a temperature data I believed to be representative of a cross-section of the city. The time-range for the recorded historical temperatures included&nbsp; the time-range that I wanted to observe, 2010 - 2024.</p></li>
-<li><p>The relevant temperature data was downloaded from the website, and was saved as three .csv’s to my local drive. After creating a new GitHub repository [NAME], I cloned it to my IDE and uploaded the .csv’s to the data folder (already placed within the .gitignore of the repository.) I created a script that would clean the data available in [NOTEBOOK NAME]. In this process, the temperature data I thought most useful was the ‘HourlyDryBulbTemperature’. While there was a ‘DailyMaximumDryBulbTemperature’, ‘DailyMaximumWetBulbTemperature’, and ‘HourlyDryBulbTemperature’ it was not as consistent or as complete as the chosen variable.</p></li>
-<li><p>I further processed the .csv data in my R script [NAME] also available on the same GitHub repository. I selected the highest hourly temperature, per day, and was able to approximate the highest daily dry bulb temperature for the years 2005 - 2024 for all three stations.&nbsp;</p></li>
-<li><p>The geographic shapefiles, for census tracts within Santa Clara County, were pulled from the TIGER/Shapeline files from the US Census Bureau [CITE]. The shapefiles were downloaded as shapefiles??? And uploaded to the data folder [NAME] within the .gitignore. I used the census tract data for the years 2009, 2014, 2019, and 2023. This was to match the GEOIDs and areas of the census tracts used within the 5 year ACS census.</p></li>
-<li><p>Finally, I required median household income data, which I retrieved using the tidycensus library in R. I retrieved the 5 year ACS census [NAME] for the years 2005 - 2009, 2010 - 2014, 2015 - 2019, and 2020&nbsp; ??????&nbsp;</p></li>
-<li><p>While I would have liked to use the median incomes of every year within the, from 2005 - 2009, this amount of data processing was not feasible given the time and scope of this project.&nbsp;</p></li>
-<li><p>hrough a series of questions, I wanted to get an introductory understanding of the relationship between temperature and median household income, in San Jose, during the years 2005 - 2009. According to articles I have read [CITE COME ARTICLES], there is a “{QUOTE]” - relationship between heat and income. (And maybe disproportionate care between poor and heat?” Through data analysis, I wanted to observe if these assumptions held up in the specific area I was investigating.&nbsp;</p></li>
-<li><p>After cleaning my temperature data and income data, I was left with the following independent variables: HourlyDryBulbTemperature (which represented the temperature taken during the hour (24 hours or not?)), and (average?) median household income per census tract (in what kind of dollars).</p></li>
-<li><p>To provide a summary of the median household income of the census tracts surrounding each of the stations, I used geospatial tools in R. I created geographic points for each of the stations and created a buffer zone of 4500 m (creating a circle around each point of x DIAMETER). Overlaying these polygons onto the Santa Clara census tract shapefile, I used the [NAME] library to find where the buffered zones of each station&nbsp; intersected with the census tract shapefiles. Using the GEOIDs of the intersected census tracts as the joining feature, I created a new joint data table of the identified census tracts and their respective median incomes, by joining them to the census [NAME] ACS 5 year.</p></li>
-<li><p>Then, after finding the respective means of the median incomes surrounding each station, I joined this information to the finalized data frame. I repeated this process for 4 times - with ACS 5 year data for the years 2009, 2014, 2019, and 2022 (as the data for 2023 was unavailable) as well as with the census tract shapefiles for the same years. (I did this to ensure that changing census tracts boundaries and labels over the time-period, would not skew the resulting mean, median income household data surrounding each station.)</p></li>
-<li><p>The resulting data frame, required for the analysis, contained the mean, median income surrounding each station for a given year. Given the time constraints, I assumed that the income variable would be applicable to a five year time period (e.g.&nbsp;the 2009 ACS median household income would be applied to the years of 2005 to 2009.)</p></li>
-<li><p>I also summarised the temperature data, by selecting for the highest temperature within the day in order to find the maximum daily temperature over the year 2005 - 2000. Furthermore, I found the days where the temperature was above 90 degrees celsius, over the time period, for all stations.</p></li>
-<li><p>Summarize your results visually and in words. Show us your results in figure(s) and/or table(s) that are carefully labeled and captioned. Describe in the text (and orally when presenting) what you found, and how these results either do or do not help you answeryour question.</p></li>
-<li><p>Now that I had all my relevant cleaned and processed, I thought about how I would go about&nbsp;</p></li>
-<li><p>What might you do next? One analysis cannot fully answer an interesting scientific question. If you had time to collect more data or conduct more analyses, what would help you answer this question better? (Make sure to answer about bias - personal and in data….)</p></li>
-</ul>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Every year, around the months of July through to August, I have noticed an uptick in news articles and government advisories cautioning people about the dangers of increasingly frequent heat waves. (Heatwaves can cause health-related problems, like heat strokes, but it can also increase the burden on water, energy, and transportation services - causing blackouts and gridlock that further exacerbate the problem.) [1] As a Bay Area native, and a burgeoning data scientist, with an interest in environmental justice, I wanted to explore the relationship between temperature, income, and location in the Bay Area. (This blog post is an extension of my final project presentation for grad school, for the course EDS222.)</p>
+<p>My starting point was quite ambitious - especially for the time span I had allotted myself for this project. A mere 2 weeks! Gathering and cleaning data, creating code to process it, analyzing and visualizing the results - to look at incomes and temperatures around the entirety of the Bay Area was no small task. Furthermore, due to the inland spread of certain counties, like Alameda, inland, there were areas where there would naturally be higher temperatures that may skew the research. Thus, I decided to zoom in on the city of San Jose, in the South Bay.</p>
+<p>Through this investigation, I pose multiple questions to try and get a holistic and introductory understanding of the relationship between temperature and median household income, in San Jose, during the years 2005 - 2009. According to articles I have read [CITE COME ARTICLES], there is a “{QUOTE]” - relationship between heat and income. (And maybe disproportionate care between poor and heat?” Through data analysis, I wanted to observe if these assumptions held up in the specific area I was investigating.</p>
+</section>
+<section id="data-cleaning" class="level2">
+<h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
+<p>Temperature data across the city of San Jose, was retrieved from the National Centers for Environmental Information, National Oceanic and Atmospheric Administration (NOAA). I utilised the climate data online tool, to pull local climatological data from my county of interest - Santa Clara. While there are a total of four stations in the area, the three stations I found the most promising in terms of recorded time range, location, and geographic relevance were the Moffett Federal Airfield, San Jose Mineta National Airport, and the Reid-Hillview Airport.</p>
+<p>This was because there were three stations, quite nicely spread out on a diagonal diameter of the city, which allowed me to gather a temperature data I believed to be representative of a cross-section of the city. The time-range for the recorded historical temperatures included the time-range that I wanted to observe, 2010 - 2024.</p>
+<p>The relevant temperature data was downloaded from the website, and was saved as three .csv’s to my local drive. After creating a new GitHub repository [NAME], I cloned it to my IDE and uploaded the .csv’s to the data folder (already placed within the .gitignore of the repository.) I created a script that would clean the data available in [NOTEBOOK NAME]. In this process, the temperature data I thought most useful was the ‘HourlyDryBulbTemperature’. While there was a ‘DailyMaximumDryBulbTemperature’, ‘DailyMaximumWetBulbTemperature’, and ‘HourlyDryBulbTemperature’ it was not as consistent or as complete as the chosen variable. I further processed the .csv data in my R script [NAME] also available on the same GitHub repository. I selected the highest hourly temperature, per day, and was able to approximate the highest daily dry bulb temperature for the years 2005 - 2024 for all three stations.</p>
+<p>The geographic shapefiles, for census tracts within Santa Clara County, were pulled from the TIGER/Shapeline files from the US Census Bureau [CITE]. The shapefiles were downloaded as shapefiles??? And uploaded to the data folder [NAME] within the .gitignore. I used the census tract data for the years 2009, 2014, 2019, and 2023. This was to match the GEOIDs and areas of the appropriate 5 year ACS.</p>
+<p>Finally, I required median household income data, which I retrieved using the tidycensus package in R. I retrieved the 5 year ACS census [NAME] for the years 2005 - 2009, 2010 - 2014, 2015 - 2019, and 2020 ??????</p>
+</section>
+<section id="data-processing" class="level2">
+<h2 class="anchored" data-anchor-id="data-processing">Data Processing</h2>
+<p>I will walk through a simplified framework of the code I created, for temperatures measured from the San Jose International Airport, 2009.</p>
+<ol type="1">
+<li>Import temperature, census tract shapefile, and ACS income data.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import temp data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sanjose <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">'raw_data'</span>,<span class="st">'sanjose_temp.csv'</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># import census shapefiles of santa clara county</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>santa_clara_geo_09 <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">read_sf</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">'raw_data'</span>,<span class="st">'2009'</span>,<span class="st">'tl_2009_06085_tract00.shp'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">GEOID =</span> CTIDFP00) <span class="sc">%&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(., <span class="at">select =</span> <span class="sc">-</span> CTIDFP00)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Match census tract with 5 year ACS of median income in the years </span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>nine_income <span class="ot">&lt;-</span> <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">'tract'</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">variables =</span> <span class="st">"B19013_001E"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">state =</span> <span class="st">"CA"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">county =</span> <span class="st">'Santa Clara'</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">year =</span> <span class="dv">2009</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Select GEOID and median income estimate for ACS dataframe</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>nine_income <span class="ot">&lt;-</span> nine_income[<span class="fu">c</span>(<span class="st">'GEOID'</span>,<span class="st">'estimate'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>Create a point from the station location, matching it to the census tract CRS. Find the census tracts the buffer intersects with.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sanjose_df <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">place=</span><span class="fu">c</span>(<span class="st">"San Jose"</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">longitude=</span><span class="fu">c</span>(<span class="sc">-</span><span class="fl">121.92795137054253</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">latitude=</span><span class="fu">c</span>(<span class="fl">37.36852024984821</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>sanjose_sf <span class="ot">=</span> <span class="fu">st_as_sf</span>(sanjose_df, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"longitude"</span>, <span class="st">"latitude"</span>), </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">crs =</span> <span class="fu">st_crs</span>(santa_clara_geo_09), <span class="at">agr =</span> <span class="st">"constant"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># use intersect to find census tracts within 2 mile radius of temperature sensing points</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>sanjose_buffer <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(sanjose_sf, <span class="dv">4500</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Find census tracts that intersect with buffer zones</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>sanjose_censustract_09 <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(sanjose_buffer, santa_clara_geo_09)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tract.png" class="img-fluid figure-img" width="336"></p>
+<figcaption>Buffered census tracts around the three stations</figcaption>
+</figure>
+</div>
+<ol start="3" type="1">
+<li>Join your appropriate income table to the census tract - to the buffered census tracts. This will find the median income per census tract in the buffered zone around the station. Find the mean of the median incomes for the selected years. (Given the time constraints, I assumed that the income variable would be applicable to a five year time period (e.g.&nbsp;the mean of the 2014 ACS median household income would be applied to the years of 2010 to 2014.))</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find census tracts that intersect with buffer zones</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sanjose_income_09 <span class="ot">&lt;-</span> <span class="fu">left_join</span>(sanjose_censustract_09, nine_income, <span class="at">by =</span> <span class="st">'GEOID'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(., <span class="at">select =</span> <span class="fu">c</span>(place, estimate)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>sanjose_income_09_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(sanjose_income_09<span class="sc">$</span>estimate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="1">
+<li>Finally, add mean, median incomes to your finished data frame containing station, year, maximum daily temperature, whether the maximum was over 90 degrees Farenheit, and mean, median income. Repeat for all stations over all selected census years - to create the following:</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="finaldf.jpg" class="img-fluid figure-img"></p>
+<figcaption>Final dataframe of variables for analysis</figcaption>
+</figure>
+</div>
+</section>
+<section id="data-visualization-and-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="data-visualization-and-analysis">Data Visualization and Analysis</h2>
+<section id="maximum-daily-temperature-data-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="maximum-daily-temperature-data-distribution">Maximum Daily Temperature Data Distribution</h3>
+<p>Let’s take an initial look into our temperature data by station, for the years 2009 to 2023.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="dist.jpg" class="img-fluid figure-img" width="377"></p>
+<figcaption>Distributions of temperature data</figcaption>
+</figure>
+</div>
+<p>The above histograms show the frequency distribution of the maximum daily temperature (in degrees Farenheit) for the San Jose Mineta International Airport, Moffett Federal Airfield, and Reid-Hillview Aiport - between the years 2009 and 2023. The distributions seem to be fairly symmetrical and unimodal.</p>
+</section>
+<section id="proportion-of-hot-days-by-location" class="level3">
+<h3 class="anchored" data-anchor-id="proportion-of-hot-days-by-location">Proportion of Hot Days by Location</h3>
+<p>Here we we will visualize the proportion of days, by station, that were recorded to be equal to or greater than 90 degrees Farenheit.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="prop.jpg" class="img-fluid figure-img" width="324"></p>
+<figcaption>Proportion of hot days by station</figcaption>
+</figure>
+</div>
+<p>We will use a Pearson’s chi-square test, to analyse the whether the frequency of hot days are similar or different in the three locations. Our test fits all the assumptions of a chi-square test: ” … test a hypothesis about one or more categorical variables. …The sample was randomly selected from the population. There are a minimum of five observations expected in each group or combination of groups.” <a href="https://www.scribbr.com/statistics/chi-square-tests/">Scribber</a></p>
+<section id="hypothesis" class="level4">
+<h4 class="anchored" data-anchor-id="hypothesis">Hypothesis</h4>
+<p><em>H<sub>0</sub></em>: The proportion of days of 90 degrees Celsius or higher, measured at San Jose, Moffett and Reid-Hill from 2009 - 2023, are the same.</p>
+<p><em>H<sub>A</sub></em>: The proportion of days of 90 degrees Celsius or higher, measured at San Jose, Moffett and Reid-Hill from 2009 - 2023, are different.</p>
+</section>
+<section id="create-table" class="level4">
+<h4 class="anchored" data-anchor-id="create-table">Create Table</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="chi.png" class="img-fluid figure-img" width="175"></p>
+<figcaption>Chi squared table for test</figcaption>
+</figure>
+</div>
+</section>
+<section id="chi-squred-test-result" class="level4">
+<h4 class="anchored" data-anchor-id="chi-squred-test-result">Chi-Squred Test Result</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="chiresult.png" class="img-fluid figure-img" width="395"></p>
+<figcaption>Chi Squared test result</figcaption>
+</figure>
+</div>
+<p>Assuming an alpha of 0.05, as the calculated p-value is less, there is strong evidence that we can reject the null hypothesis.</p>
+</section>
+</section>
+<section id="mean-income-and-station-location" class="level3">
+<h3 class="anchored" data-anchor-id="mean-income-and-station-location">Mean Income and Station Location</h3>
+<p>Perform a hypothesis test by randomization to investigate whether mean incomes vary by location.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="meanincome.png" class="img-fluid figure-img" width="316"></p>
+<figcaption>Distribution of mean, median incomes by location</figcaption>
+</figure>
+</div>
+<p><em>H<sub>0</sub></em>: There is no difference between the mean incomes of the reid-hill and moffett census tracts.</p>
+<p><em>H<sub>A</sub></em>: There is a difference between the mean incomes of the reid-hill and moffett census tracts.</p>
+<p>Use randomization to simulate the distribution of the sample statistic under the null hypothesis.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="meanstat.png" class="img-fluid figure-img" width="409"></p>
+<figcaption>Sample Statistic under Null Hypothesis</figcaption>
+</figure>
+</div>
+<p>Under this randomization test, our calculated p-value is 0. As it is lower than our assumed alpha of 0.05, we can assume that there is strong evidence that we can reject the null hypothesis.</p>
+</section>
+</section>
+<section id="conclusion-bias-and-limitations" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-bias-and-limitations">Conclusion, Bias, and Limitations</h2>
+<p>Through this preliminary investigation, we have drawn the conclusion that there is a significant difference in the number of days where the maximum daily temperature are equal to or greater than 90 degrees Fahrenheit, by station - over the years 2009 to 2023. We have also concluded that there is a difference in the means of the median incomes in the census tracts surrounding the temperature sensing stations in a circular zone - with a radius of 4500 m.</p>
+<p>Next steps I would like to take, to further explore the relationship between temperature and income in San Jose, would be to create a regression model function that may explain the interaction more directly. However, I would need more robust median income data (e.g.&nbsp;median income date for all years from 2009 to 2023). I would also like to see the temporal relationship between median income and maximum daily temperature, to see if the course of these interactions over the time-period desired.</p>
+<p>Limitations I encountered, whilst working on this project, were hard timelines and data availability. Due to the timeline of this project, I narrowed my scope as well as made the decision to not have as a robust dataset as I would have ideally liked - for cenusus tract median income. I would have also preferred to have a couple more locations, that recorded the daily maximum temperature, around the city of San Jose.</p>
+<p>These external and internal limitations will have caused bias impacts upon the dataset. As San Jose temperature monitors showed the temperature of a nice cross-section of the city and was documented well, it played a roled into why I chose this location for study. I have also had previous knowledge of the disparities in income, spatially, through the <a href="https://screeningtool.geoplatform.gov/en/#3/33.47/-97.5">Climate and Economic Justice Screening Tool</a>. Thus, at the very least availability and confirmation bias are present in my analysis.</p>
+<p>This project and the subsequent results have definitely increased my interest in the subject and I would like to improve and build upon this framework for future research. I would also like to expand this study, in order to get a better sense of the correlation of median income and maximum daily temperatures in the wider Bay Area. I would also like to investigate whether it’s the chicken or the egg: Do areas with higher incomes tend to have cooler ambient temperatures due to investment in cooling infrastructure and green space urban planning or do more affluent neighborhoods tend to be built in cooler areas? Are there historical redlining impacts that cause low income communities to tend to be in hotter areas of cities/counties? How can we mitigate heat-factors to most effectively help elderly communities, BIPOC, and rural areas?</p>
+</section>
+<section id="text-references" class="level2">
+<h2 class="anchored" data-anchor-id="text-references">Text References</h2>
+</section>
+<section id="data-access" class="level2">
+<h2 class="anchored" data-anchor-id="data-access">Data Access</h2>
 
 
+</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{moraes2024,
   author = {Moraes, Naomi},
   title = {Investigating {Temperature} and {Income} in {San} {Jose}},
   date = {2024-12-12},
-  url = {https://nmoraescommit.github.io/blog/2024-10-18-my-first-post},
+  url = {https://nmoraescommit.github.io/blog/2024-10-18-heat-income-sj},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-moraes2024" class="csl-entry quarto-appendix-citeas" role="listitem">
 Moraes, Naomi. 2024. <span>“Investigating Temperature and Income in San
-Jose.”</span> December 12, 2024. <a href="https://nmoraescommit.github.io/blog/2024-10-18-my-first-post">https://nmoraescommit.github.io/blog/2024-10-18-my-first-post</a>.
+Jose.”</span> December 12, 2024. <a href="https://nmoraescommit.github.io/blog/2024-10-18-heat-income-sj">https://nmoraescommit.github.io/blog/2024-10-18-heat-income-sj</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
