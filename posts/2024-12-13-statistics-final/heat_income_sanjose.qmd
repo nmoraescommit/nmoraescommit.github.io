@@ -1,0 +1,82 @@
+---
+title: "Investigating Temperature and Income in San Jose"
+description: "Statistical data analysis project concering the relationship between heat and income in San Jose, CA, for the graduate course EDS 222"
+author:
+  - name: Naomi Moraes
+    url: https://nmoraescommit.github.io/
+    affilitation-url: https://bren.ucsb.edu/masters-programs/master-environmental-data-science
+date: 2024-12-12
+categories: [MEDS, Stats]
+toc: true
+image: sj.jpg # put in folder as with csl:
+citation:
+  url: https://nmoraescommit.github.io/blog/2024-10-18-my-first-post
+draft: false
+draft-mode: visible
+---
+
+-   My starting point was quite ambitious - especially for the time span I had allotted myself for this project. A mere 2 weeks! Gathering and cleaning data, creating code to process it, analyzing and visualizing the results - to look at incomes and temperatures around the entirety of the Bay Area was no small task. Furthermore, due to the inland spread of certain counties, like Alameda, inland, there were areas where there would naturally be higher temperatures that may skew the research. 
+
+-   Thus, looking at my available data sources of the NOAA local temperature data as well as the data made available by the tidycensus library in R, I decided to zoom in on the city of San Jose, in the South Bay.
+
+-   Through a series of questions, I wanted to get an introductory understanding of the relationship between temperature and median household income, in San Jose, during the years 2005 - 2009. According to articles I have read \[CITE COME ARTICLES\], there is a “{QUOTE\]” - relationship between heat and income. (And maybe disproportionate care between poor and heat?” Through data analysis, I wanted to observe if these assumptions held up in the specific area I was investigating. 
+
+-   After cleaning my temperature data and income data, I was left with the following independent variables: HourlyDryBulbTemperature (which represented the temperature taken during the hour (24 hours or not?)), and (average?) median household income per census tract (in what kind of dollars).
+
+-   To provide a summary of the median household income of the census tracts surrounding each of the stations, I used geospatial tools in R. I created geographic points for each of the stations and created a buffer zone of 4500 m (creating a circle around each point of x DIAMETER). Overlaying these polygons onto the Santa Clara census tract shapefile, I used the \[NAME\] library to find where the buffered zones of each station  intersected with the census tract shapefiles. Using the GEOIDs of the intersected census tracts as the joining feature, I created a new joint data table of the identified census tracts and their respective median incomes, by joining them to the census \[NAME\] ACS 5 year.
+
+-   Then, after finding the respective means of the median incomes surrounding each station, I joined this information to the finalized data frame. I repeated this process for 4 times - with ACS 5 year data for the years 2009, 2014, 2019, and 2022 (as the data for 2023 was unavailable) as well as with the census tract shapefiles for the same years. (I did this to ensure that changing census tracts boundaries and labels over the time-period, would not skew the resulting mean, median income household data surrounding each station.)
+
+-   The resulting data frame, required for the analysis, contained the mean, median income surrounding each station for a given year. Given the time constraints, I assumed that the income variable would be applicable to a five year time period (e.g. the 2009 ACS median household income would be applied to the years of 2005 to 2009.)
+
+-   I also summarised the temperature data, by selecting for the highest temperature within the day in order to find the maximum daily temperature over the year 2005 - 2000. Furthermore, I found the days where the temperature was above 90 degrees celsius, over the time period, for all stations.
+
+<!-- -->
+
+-   Describe your data. Where did you access it? What are its spatial and temporal features? What are its limitations? What do you know about the sampling strategy and what biases that may introduce? If helpful, you can use a histogram, scatterplot, or summary statistics table to describe your data.
+
+    -   Temperature data across the city of San Jose, was retrieved from the National Centers for Environmental Infomation, National Oceanic and Atmospheric Administration (NOAA) climate data online, specifically their local climatological data. Selecting the county of interest as Santa Clara, we  
+
+    -   This was because there were three stations, quite nicely spread out on a diagonal diameter of the city, which allowed me to gather a temperature data I believed to be representative of a cross-section of the city. The time-range for the recorded historical temperatures included  the time-range that I wanted to observe, 2010 - 2024.
+
+    -   
+
+-   Summarize your results visually and in words. Show us your results in figure(s) and/or table(s) that are carefully labeled and captioned. Describe in the text (and orally when presenting) what you found, and how these results either do or do not help you answeryour question.
+
+-   Every year, around the months of July through to August, I have noticed an uptick in news articles and government advisories cautioning people about the dangers of increasingly frequent heat waves. (Heatwaves can cause health-related problems, like heat strokes, but it can also increase the burden on water, energy, and transportation services - causing blackouts and gridlock that further exacerbate the problem. (Heatwaves, n.d.)) As a Bay Area native, and a burgeoning data scientist, with an interest in environmental justice, I wanted to explore the relationship between temperature, income, and location in the Bay Area. (This blog post is an extension of my final project presentation for grad school, for the course EDS222.) Through this investigation, I pose multiple questions to try and get a holistic understanding of the topic.
+
+-   My starting point was quite ambitious - especially for the time span I had allotted myself for this project. A mere 2 weeks! Gathering and cleaning data, creating code to process it, analyzing and visualizing the results - to look at incomes and temperatures around the entirety of the Bay Area was no small task. Furthermore, due to the inland spread of certain counties, like Alameda, inland, there were areas where there would naturally be higher temperatures that may skew the research. 
+
+-   Thus, looking at my data sources of the NOAA local temperature data as well as the data made available by the tidycensus library in R, I decided to zoom in on the city of San Jose, in the South Bay.
+
+-   Temperature data across the city of San Jose, was retrieved from the National Centers for Environmental Information, National Oceanic and Atmospheric Administration (NOAA). I utilised the climate data online tool, to pull local climatological data from my county of interest - Santa Clara. While there are a total of four stations in the area, the three stations I found the most promising in terms of recorded time range, location, and geographic relevance were the Moffett Federal Airfield, San Jose Mineta National Airport, and the Reid-Hillview Airport.
+
+-   This was because there were three stations, quite nicely spread out on a diagonal diameter of the city, which allowed me to gather a temperature data I believed to be representative of a cross-section of the city. The time-range for the recorded historical temperatures included  the time-range that I wanted to observe, 2010 - 2024.
+
+-   The relevant temperature data was downloaded from the website, and was saved as three .csv’s to my local drive. After creating a new GitHub repository \[NAME\], I cloned it to my IDE and uploaded the .csv’s to the data folder (already placed within the .gitignore of the repository.) I created a script that would clean the data available in \[NOTEBOOK NAME\]. In this process, the temperature data I thought most useful was the ‘HourlyDryBulbTemperature’. While there was a ‘DailyMaximumDryBulbTemperature’, ‘DailyMaximumWetBulbTemperature’, and ‘HourlyDryBulbTemperature’ it was not as consistent or as complete as the chosen variable.
+
+-   I further processed the .csv data in my R script \[NAME\] also available on the same GitHub repository. I selected the highest hourly temperature, per day, and was able to approximate the highest daily dry bulb temperature for the years 2005 - 2024 for all three stations. 
+
+-   The geographic shapefiles, for census tracts within Santa Clara County, were pulled from the TIGER/Shapeline files from the US Census Bureau \[CITE\]. The shapefiles were downloaded as shapefiles??? And uploaded to the data folder \[NAME\] within the .gitignore. I used the census tract data for the years 2009, 2014, 2019, and 2023. This was to match the GEOIDs and areas of the census tracts used within the 5 year ACS census.
+
+-   Finally, I required median household income data, which I retrieved using the tidycensus library in R. I retrieved the 5 year ACS census \[NAME\] for the years 2005 - 2009, 2010 - 2014, 2015 - 2019, and 2020  ?????? 
+
+-   While I would have liked to use the median incomes of every year within the, from 2005 - 2009, this amount of data processing was not feasible given the time and scope of this project. 
+
+-   hrough a series of questions, I wanted to get an introductory understanding of the relationship between temperature and median household income, in San Jose, during the years 2005 - 2009. According to articles I have read \[CITE COME ARTICLES\], there is a “{QUOTE\]” - relationship between heat and income. (And maybe disproportionate care between poor and heat?” Through data analysis, I wanted to observe if these assumptions held up in the specific area I was investigating. 
+
+-   After cleaning my temperature data and income data, I was left with the following independent variables: HourlyDryBulbTemperature (which represented the temperature taken during the hour (24 hours or not?)), and (average?) median household income per census tract (in what kind of dollars).
+
+-   To provide a summary of the median household income of the census tracts surrounding each of the stations, I used geospatial tools in R. I created geographic points for each of the stations and created a buffer zone of 4500 m (creating a circle around each point of x DIAMETER). Overlaying these polygons onto the Santa Clara census tract shapefile, I used the \[NAME\] library to find where the buffered zones of each station  intersected with the census tract shapefiles. Using the GEOIDs of the intersected census tracts as the joining feature, I created a new joint data table of the identified census tracts and their respective median incomes, by joining them to the census \[NAME\] ACS 5 year.
+
+-   Then, after finding the respective means of the median incomes surrounding each station, I joined this information to the finalized data frame. I repeated this process for 4 times - with ACS 5 year data for the years 2009, 2014, 2019, and 2022 (as the data for 2023 was unavailable) as well as with the census tract shapefiles for the same years. (I did this to ensure that changing census tracts boundaries and labels over the time-period, would not skew the resulting mean, median income household data surrounding each station.)
+
+-   The resulting data frame, required for the analysis, contained the mean, median income surrounding each station for a given year. Given the time constraints, I assumed that the income variable would be applicable to a five year time period (e.g. the 2009 ACS median household income would be applied to the years of 2005 to 2009.)
+
+-   I also summarised the temperature data, by selecting for the highest temperature within the day in order to find the maximum daily temperature over the year 2005 - 2000. Furthermore, I found the days where the temperature was above 90 degrees celsius, over the time period, for all stations.
+
+-   Summarize your results visually and in words. Show us your results in figure(s) and/or table(s) that are carefully labeled and captioned. Describe in the text (and orally when presenting) what you found, and how these results either do or do not help you answeryour question.
+
+-   Now that I had all my relevant cleaned and processed, I thought about how I would go about 
+
+-   What might you do next? One analysis cannot fully answer an interesting scientific question. If you had time to collect more data or conduct more analyses, what would help you answer this question better? (Make sure to answer about bias - personal and in data….)
