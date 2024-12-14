@@ -8,7 +8,7 @@
 
 <meta name="author" content="Naomi Moraes">
 <meta name="dcterms.date" content="2024-12-12">
-<meta name="description" content="Statistical data analysis project concering the relationship between heat and income in San Jose, CA, for the graduate course EDS 222">
+<meta name="description" content="Statistical data analysis project concering the relationship between heat and income in San Jose, CA">
 
 <title>nmoraescommit - Investigating Temperature and Income in San Jose</title>
 <style>
@@ -147,7 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <h1 class="title">Investigating Temperature and Income in San Jose</h1>
                   <div>
         <div class="description">
-          Statistical data analysis project concering the relationship between heat and income in San Jose, CA, for the graduate course EDS 222
+          Statistical data analysis project concering the relationship between heat and income in San Jose, CA
         </div>
       </div>
                           <div class="quarto-categories">
@@ -196,8 +196,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#mean-income-and-station-location" id="toc-mean-income-and-station-location" class="nav-link" data-scroll-target="#mean-income-and-station-location">Mean Income and Station Location</a></li>
   </ul></li>
   <li><a href="#conclusion-bias-and-limitations" id="toc-conclusion-bias-and-limitations" class="nav-link" data-scroll-target="#conclusion-bias-and-limitations">Conclusion, Bias, and Limitations</a></li>
-  <li><a href="#text-references" id="toc-text-references" class="nav-link" data-scroll-target="#text-references">Text References</a></li>
   <li><a href="#data-access" id="toc-data-access" class="nav-link" data-scroll-target="#data-access">Data Access</a></li>
+  <li><a href="#github-repo" id="toc-github-repo" class="nav-link" data-scroll-target="#github-repo">GitHub Repo</a></li>
   </ul>
 </nav>
     </div>
@@ -210,17 +210,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Every year, around the months of July through to August, I have noticed an uptick in news articles and government advisories cautioning people about the dangers of increasingly frequent heat waves. (Heatwaves can cause health-related problems, like heat strokes, but it can also increase the burden on water, energy, and transportation services - causing blackouts and gridlock that further exacerbate the problem.) [1] As a Bay Area native, and a burgeoning data scientist, with an interest in environmental justice, I wanted to explore the relationship between temperature, income, and location in the Bay Area. (This blog post is an extension of my final project presentation for grad school, for the course EDS222.)</p>
+<p><img src="heat.jpg" class="img-fluid"></p>
+<p>Every year, around the months of July through to August, I have noticed an uptick in news articles and government advisories cautioning people about the dangers of increasingly frequent heat waves. (Heatwaves can cause health-related problems, like heat strokes, but it can also increase the burden on water, energy, and transportation services - causing blackouts and gridlock that further exacerbate the problem.) <a href="https://www.who.int/health-topics/heatwaves#tab=tab_1">WHO - Heatwaves</a> As a Bay Area native, and a burgeoning data scientist, with an interest in environmental justice, I wanted to explore the relationship between temperature, income, and location in the Bay Area. (This blog post is an extension of my final project presentation for grad school, for the course EDS222.)</p>
 <p>My starting point was quite ambitious - especially for the time span I had allotted myself for this project. A mere 2 weeks! Gathering and cleaning data, creating code to process it, analyzing and visualizing the results - to look at incomes and temperatures around the entirety of the Bay Area was no small task. Furthermore, due to the inland spread of certain counties, like Alameda, inland, there were areas where there would naturally be higher temperatures that may skew the research. Thus, I decided to zoom in on the city of San Jose, in the South Bay.</p>
-<p>Through this investigation, I pose multiple questions to try and get a holistic and introductory understanding of the relationship between temperature and median household income, in San Jose, during the years 2005 - 2009. According to articles I have read [CITE COME ARTICLES], there is a “{QUOTE]” - relationship between heat and income. (And maybe disproportionate care between poor and heat?” Through data analysis, I wanted to observe if these assumptions held up in the specific area I was investigating.</p>
+<p>Through this investigation, I pose multiple questions to try and get a holistic and introductory understanding of the relationship between temperature and median household income, in San Jose, during the years 2005 - 2009. According to <a href="https://www.cbsnews.com/losangeles/news/caltech-heat-disparity-between-low-income-neighborhoods-affluent-areas-higher-temperatures/">MIT</a> “While climate change afflicts the world on a global scale, a new study from Caltech finds that residents of low-income neighborhoods are bearing the brunt of the hotter temperatures.” Through data analysis, I wanted to observe if these assumptions held up in the specific area I was investigating.</p>
 </section>
 <section id="data-cleaning" class="level2">
 <h2 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h2>
 <p>Temperature data across the city of San Jose, was retrieved from the National Centers for Environmental Information, National Oceanic and Atmospheric Administration (NOAA). I utilised the climate data online tool, to pull local climatological data from my county of interest - Santa Clara. While there are a total of four stations in the area, the three stations I found the most promising in terms of recorded time range, location, and geographic relevance were the Moffett Federal Airfield, San Jose Mineta National Airport, and the Reid-Hillview Airport.</p>
-<p>This was because there were three stations, quite nicely spread out on a diagonal diameter of the city, which allowed me to gather a temperature data I believed to be representative of a cross-section of the city. The time-range for the recorded historical temperatures included the time-range that I wanted to observe, 2010 - 2024.</p>
-<p>The relevant temperature data was downloaded from the website, and was saved as three .csv’s to my local drive. After creating a new GitHub repository [NAME], I cloned it to my IDE and uploaded the .csv’s to the data folder (already placed within the .gitignore of the repository.) I created a script that would clean the data available in [NOTEBOOK NAME]. In this process, the temperature data I thought most useful was the ‘HourlyDryBulbTemperature’. While there was a ‘DailyMaximumDryBulbTemperature’, ‘DailyMaximumWetBulbTemperature’, and ‘HourlyDryBulbTemperature’ it was not as consistent or as complete as the chosen variable. I further processed the .csv data in my R script [NAME] also available on the same GitHub repository. I selected the highest hourly temperature, per day, and was able to approximate the highest daily dry bulb temperature for the years 2005 - 2024 for all three stations.</p>
-<p>The geographic shapefiles, for census tracts within Santa Clara County, were pulled from the TIGER/Shapeline files from the US Census Bureau [CITE]. The shapefiles were downloaded as shapefiles??? And uploaded to the data folder [NAME] within the .gitignore. I used the census tract data for the years 2009, 2014, 2019, and 2023. This was to match the GEOIDs and areas of the appropriate 5 year ACS.</p>
-<p>Finally, I required median household income data, which I retrieved using the tidycensus package in R. I retrieved the 5 year ACS census [NAME] for the years 2005 - 2009, 2010 - 2014, 2015 - 2019, and 2020 ??????</p>
+<p>This was because there were three stations, quite nicely spread out on a diagonal diameter of the city, which allowed me to gather a temperature data I believed to be representative of a cross-section of the city. The time-range for the recorded historical temperatures included the time-range that I wanted to observe, 2009 - 2024.</p>
+<p>The relevant temperature data was downloaded from the website, and was saved as three .csv’s to my local drive. After creating a new GitHub repository <code>eds222_final_project</code>, I cloned it to my IDE and uploaded the .csv’s to the data folder (already placed within the .gitignore of the repository.) I created a script that would clean the data available in <code>data_clean.ipynb</code>. In this process, the temperature data I thought most useful was the ‘HourlyDryBulbTemperature’. While there was a ‘DailyMaximumDryBulbTemperature’, ‘DailyMaximumWetBulbTemperature’, and ‘HourlyDryBulbTemperature’ it was not as consistent or as complete as the chosen variable. I further processed the .csv data in my R script <code>temp_income_BA.qmd</code> also available on the same GitHub repository. I selected the highest hourly temperature, per day, and was able to approximate the highest daily dry bulb temperature for the years 2009 - 2023 for all three stations.</p>
+<p>The geographic shapefiles, for census tracts within Santa Clara County, were pulled from the TIGER/Shapeline files from the US Census Bureau. The shapefiles were uploaded to the data folder <code>raw_data</code> within the .gitignore. I used the census tract data for the years 2009, 2014, 2019, and 2023. This was to match the GEOIDs and areas of the appropriate American Community Survey 5-year data.</p>
+<p>Finally, I required median household income data, which I retrieved using the <code>tidycensus</code> package in R. I retrieved the American Community Survey 5-year data for the years 2005 - 2009, 2010 - 2014, 2015 - 2019, and 2019 - 2023.</p>
 </section>
 <section id="data-processing" class="level2">
 <h2 class="anchored" data-anchor-id="data-processing">Data Processing</h2>
@@ -369,11 +370,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>These external and internal limitations will have caused bias impacts upon the dataset. As San Jose temperature monitors showed the temperature of a nice cross-section of the city and was documented well, it played a roled into why I chose this location for study. I have also had previous knowledge of the disparities in income, spatially, through the <a href="https://screeningtool.geoplatform.gov/en/#3/33.47/-97.5">Climate and Economic Justice Screening Tool</a>. Thus, at the very least availability and confirmation bias are present in my analysis.</p>
 <p>This project and the subsequent results have definitely increased my interest in the subject and I would like to improve and build upon this framework for future research. I would also like to expand this study, in order to get a better sense of the correlation of median income and maximum daily temperatures in the wider Bay Area. I would also like to investigate whether it’s the chicken or the egg: Do areas with higher incomes tend to have cooler ambient temperatures due to investment in cooling infrastructure and green space urban planning or do more affluent neighborhoods tend to be built in cooler areas? Are there historical redlining impacts that cause low income communities to tend to be in hotter areas of cities/counties? How can we mitigate heat-factors to most effectively help elderly communities, BIPOC, and rural areas?</p>
 </section>
-<section id="text-references" class="level2">
-<h2 class="anchored" data-anchor-id="text-references">Text References</h2>
-</section>
 <section id="data-access" class="level2">
 <h2 class="anchored" data-anchor-id="data-access">Data Access</h2>
+<p>All data required to run the code is placed in the /data and /raw_data folder, in the .gitignore of the repo.</p>
+<p>If you would prefer to choose your own locations or personally download the data to your server please refer to the following citations:</p>
+<p>NOAA Local Climatological Data: National Centers for Environmental Information (NCEI). (n.d.). Local Climatological Data (LCD) | Data Tools | Climate Data Online (CDO) | National Climatic Data Center (NCDC). Climate Data Online (CDO). <a href="https://www.ncei.noaa.gov/cdo-web/datatools/lcd">https://www.ncei.noaa.gov/cdo-web/datatools/lcd</a></p>
+<p>Census Tract Shapefiles: US Census Bureau. (2024, October 9). TIGER/Line shapefiles. Census.gov. <a href="https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html">https://www.ncei.noaa.gov/cdo-web/datatools/lcd</a></p>
+<p>Median Income from Tidycensus: Walker K, Herman M (2024). tidycensus: Load US Census Boundary and Attribute Data as ‘tidyverse’ and ‘sf’-Ready Data Frames. R package version 1.6.6, <a href="https://walker-data.com/tidycensus/">https://www.ncei.noaa.gov/cdo-web/datatools/lcd</a>.</p>
+</section>
+<section id="github-repo" class="level2">
+<h2 class="anchored" data-anchor-id="github-repo">GitHub Repo</h2>
+<p><a href="https://github.com/nmoraescommit/eds222_final_project">Access the unfiltered code here!</a></p>
 
 
 </section>
