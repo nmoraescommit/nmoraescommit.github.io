@@ -29,7 +29,7 @@ fig-align: center
 
 After the nail-biting months, prior to the 2024 presidential elections, where I spent (what felt like) every other moment glued to the polls, news, and social media, the results of 2024 elections flooded in through the aforementioned channels. While the votes were being called, the AP News United States Map went through a metamorphosis where insignificant dots, then counties, then states, bled red. I remember feeling detached - thinking "Did no one remember his previous 4 years?"
 
-While news pundits and reporters, friends and family, tried making sense of the quantified sentiments of the American people - where the usual social issues were bought to the fore (racism, misogyny, homophobia, etc.) - swathes of Trump supporters insisted "It's the economy, stupid!"
+While news pundits and reporters, friends and family, tried making sense of the quantified sentiments of the American people - and important social justice issues were bought to the fore (racism, misogyny, homophobia, classism, etc.) - swathes of Trump supporters insisted "It's the economy, stupid!"
 
 For my final data visualization piece/art therapy substitute, for the EDS 240: Data Visualization and Communication course, I wanted to create an infographic that would highlight the absurdity of this claim.
 
@@ -37,7 +37,17 @@ For my final data visualization piece/art therapy substitute, for the EDS 240: D
 
 Initially, I had wanted to visualize socio-economic characteristics of American states by 2024 party affiliation. Further research has shown that the social welfare aspects are better analyzed through the lenses of race, gender, and income status - rather then by voting party. Therefore, I narrowed my field of focus to finances of states as well as state welfare spending.
 
-### Data Used
+## Final Visualization
+
+![](Infographic.jpg)
+
+## Process
+
+For the final visualization, I used R to create my plots and Canva to create the larger infographic. As I removed the backgrounds of my R plots, in order to create a more cohesive and professional look, using Canva, this impacted the axis titles, benchmarks, and line guides. Thus these details were re-added in post.
+
+### Set-up
+
+#### Data
 
 For my infographic, I used data from the following sources:
 
@@ -53,15 +63,113 @@ welfare <- read_csv(here::here("data", "welfare1.csv"))
 welfare_state <- read_csv(here::here("data", "welfare_state1.csv"))
 ```
 
-## Final Visualization
+#### Preliminary Data Cleaning
 
-![](Infographic.jpg)
+Below is the preliminary code to clean your imported csv data:
 
-## Process
+```{r eval = FALSE}
+# Create df with state names and abbreviations
+state_mapping <- data.frame(
+  NAME = state.name,
+  Abbreviation = state.abb,
+  stringsAsFactors = FALSE
+)
 
-For the final visualization, I used R to create my plots and Canva to create the larger infographic. As I removed the backgrounds of my R plots, in order to create a more cohesive and professional look, using Canva, this impacted the axis titles, benchmarks, and line guides. Thus these details were re-added in post.
+# Create new df 'join'
+join <- state_mapping
 
-### Libraries
+# Create list of state abbreviations and voting affilliation
+election <- c(
+  'CA' = 'D', 'OR' = 'D', 'CO' = 'D', 'NM' = 'D', 'MN' = 'D', 'IL' = 'D', 
+  'VA' = 'D', 'DC' = 'D', 'MD' = 'D', 'ME' = 'D', 'NH' = 'D', 'VT' = 'D', 
+  'NY' = 'D', 'MA' = 'D', 'CT' = 'D', 'NJ' = 'D', 'DE' = 'D', 'RI' = 'D',
+  'AL' = 'R', 'AK' = 'R', 'AZ' = 'R', 'AR' = 'R', 'FL' = 'R', 'GA' = 'R', 
+  'HI' = 'D', 'ID' = 'R', 'IN' = 'R', 'IA' = 'R', 'KS' = 'R', 'KY' = 'R', 
+  'LA' = 'R', 'MS' = 'R', 'MO' = 'R', 'MT' = 'R', 'NE' = 'R', 'NV' = 'R', 
+  'NC' = 'R', 'ND' = 'R', 'OH' = 'R', 'OK' = 'R', 'OR' = 'R', 'PA' = 'R', 
+  'SC' = 'R', 'SD' = 'R', 'TN' = 'R', 'TX' = 'R', 'UT' = 'R', 'WA' = 'D', 
+  'WI' = 'R', 'WY' = 'R', 'MI' = 'R', 'WV' = 'R'
+)
+
+# Add voting affiliation to join df
+join$election_status <- election[join$Abbreviation]
+
+clean_join <- join %>%
+  clean_names()
+
+# create palette to be used to signify voting party
+election_palette <- c("D" = "lightskyblue","R" = "lightcoral")
+
+# create dataframes for per capita balance (expenditures and reciepts)  bargraphs
+pcap_take_data <- pcap %>%
+  mutate(pcap_balance = as.numeric(gsub("[$,]", "", pcap_balance))) %>%
+  arrange(rank) %>%
+  slice_head(n = 10) %>%
+  left_join(select(clean_join, name, abbreviation, election_status), by="name") %>%
+  mutate(name = fct_reorder(.f = name, .x = pcap_balance))
+
+pcap_give_data <- pcap %>%
+  mutate(pcap_balance = as.numeric(gsub("[$,]", "", pcap_balance))) %>%
+  arrange(rank) %>%
+  slice_tail(n = 10) %>%
+  left_join(select(clean_join, name, abbreviation, election_status), by="name") %>%
+  mutate(name = fct_reorder(.f = name, .x = -(pcap_balance)))
+
+# Clean gdp df
+gdp_clean <- gdp %>%
+  clean_names() %>%
+  rename(president_party = x4)
+
+# Clean welfare df
+welfare_clean <- welfare %>%
+  rename("name" = "United States .................................................................................") %>%
+  rename("welfare_spend" = "11,097")
+
+welfare_clean <- welfare_clean[!grepl("^[.]+$", welfare_clean$name), ]
+
+welfare_clean$name <- gsub("([A-Za-z ]+)[.]+.*", "\\1", welfare_clean$name)
+
+welfare_clean_1 <- welfare_clean[-c(53, 8, 10, 15, 21, 29, 42, 47,1), ]
+
+welfare_clean_1 <- welfare_clean_1 %>%
+  left_join(select(clean_join, name, abbreviation), by="name")
+
+# Clean welfare_state (sector expenditures by state)df
+welfare_state_clean <- welfare_state %>%
+  clean_names()
+
+welfare_state_clean$name <- gsub("([A-Za-z ]+)[.]+.*", "\\1", welfare_state_clean$name)
+
+welfare_state_clean <- welfare_state_clean[-c(51, 52, 53, 54, 55), ]
+
+welfare_state_clean_1 <- welfare_state_clean %>%
+  left_join(select(clean_join, name, abbreviation), by="name")
+
+welfare_state_clean_1 <- welfare_state_clean_1 %>%
+  rename("K-12 Ed." = "elementary_secondary_education") %>%
+  rename("Higher Ed." = "higher_education") %>%
+  rename("Public Welfare" = "public_welfare") %>%
+  rename("Healthcare" = "health_and_hospitals") %>%
+  rename("Highways" = "highways") %>%
+  rename("Police" = "police") %>%
+  rename("Other" = "other") %>%
+  pivot_longer(
+    cols = c("K-12 Ed.", "Higher Ed.", "Public Welfare",
+             "Healthcare", "Highways", "Police", "Other"),
+    names_to = "spend_sector",
+    values_to = "value"
+  ) %>%
+  select(name, spend_sector, value, abbreviation) %>%
+  left_join(select(clean_join, name, election_status), by="name") 
+
+  ordered_sectors <- c("K-12 Ed.", "Higher Ed.", "Healthcare", "Public Welfare", "Police", "Highways", "Other")
+  
+  welfare_state_clean_1 <- welfare_state_clean_1 %>%
+  mutate(spend_sector = factor(spend_sector, levels = ordered_sectors)) 
+```
+
+
+#### Libraries
 
 I used the following libraries to create the plots in R
 
@@ -82,6 +190,7 @@ library(geofacet)
 ### Visualization 1
 
 ![](gdp.jpg){width=400}
+Below is the code used to create the graph:
 
 ```{r eval=FALSE}
 gdp_line_graph <- ggplot(data = gdp_clean, aes(x = year, y = gdp_growth)) +
@@ -127,6 +236,7 @@ I wanted to create a visualization of annual GDP growth rate (%), highlighting t
 ### Visualization 2
 
 ![](tile_gdp.jpg){width=400}
+Below is the code used to create the graph:
 
 ```{r eval=FALSE}
 
@@ -149,6 +259,7 @@ This tile visual was used to create a simple but effective "map" which could als
 ### Visualization 3
 
 ![](welfare_state.jpg){width=400}
+Below is the code used to create the graph:
 
 ```{r eval=FALSE}
 welfare_state_spend_plot <- welfare_state_clean_1 %>%
@@ -169,6 +280,7 @@ In order to add some nuance on where this welfare spending was being filtered to
 
 ![](give.jpg){width=300}
 ![](take.jpg){width=300}
+Below is the code used to create the graphs:
 
 ```{r eval=FALSE}
   pcap_take_graph <- ggplot(data = pcap_take_data, aes(x = name, y = pcap_balance, fill = election_status)) +
