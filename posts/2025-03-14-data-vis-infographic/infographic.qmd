@@ -47,6 +47,24 @@ For the final visualization, I used R to create my plots and Canva to create the
 
 ### Set-up
 
+#### Libraries
+
+I used the following libraries to create the plots in R
+
+```{r eval=FALSE}
+# Load Libraries
+library(tidycensus)
+library(dplyr)
+library(here)
+library(janitor)
+library(tidyverse)
+library(tidyr)
+library(plotly)
+library(ggplot2)
+library(scales)
+library(geofacet)
+```
+
 #### Data
 
 For my infographic, I used data from the following sources:
@@ -168,28 +186,10 @@ welfare_state_clean_1 <- welfare_state_clean_1 %>%
   mutate(spend_sector = factor(spend_sector, levels = ordered_sectors)) 
 ```
 
-
-#### Libraries
-
-I used the following libraries to create the plots in R
-
-```{r eval=FALSE}
-# Load Libraries
-library(tidycensus)
-library(dplyr)
-library(here)
-library(janitor)
-library(tidyverse)
-library(tidyr)
-library(plotly)
-library(ggplot2)
-library(scales)
-library(geofacet)
-```
-
 ### Visualization 1
 
-![](gdp.jpg){width=400}
+![](gdp.jpg){width="400"} 
+
 Below is the code used to create the graph:
 
 ```{r eval=FALSE}
@@ -235,7 +235,8 @@ I wanted to create a visualization of annual GDP growth rate (%), highlighting t
 
 ### Visualization 2
 
-![](tile_gdp.jpg){width=400}
+![](tile_gdp.jpg){width="400"} 
+
 Below is the code used to create the graph:
 
 ```{r eval=FALSE}
@@ -258,7 +259,8 @@ This tile visual was used to create a simple but effective "map" which could als
 
 ### Visualization 3
 
-![](welfare_state.jpg){width=400}
+![](welfare_state.jpg){width="400"} 
+
 Below is the code used to create the graph:
 
 ```{r eval=FALSE}
@@ -278,8 +280,8 @@ In order to add some nuance on where this welfare spending was being filtered to
 
 ### Visualization 4
 
-![](give.jpg){width=300}
-![](take.jpg){width=300}
+![](give.jpg){width="300"} ![](take.jpg){width="300"} 
+
 Below is the code used to create the graphs:
 
 ```{r eval=FALSE}
@@ -314,12 +316,12 @@ Finally, I wanted to create a "winged" bar graph of per capita balance of paymen
 
 I touched upon some of the chosen design elements - but I'd like to describe a few more including:
 
-- Themes: in R, I used a minimal, light, or void theme. Due to the background removal function in Canva - this was necessary in order to avoid the blurring of the wanted plotted images. Thus, using these themes made it easier to remove the background - and were reillustrated in Canva using line and text elements.
-- General design: I wanted to create a cohesive design, allowing multiple visualizations, and quite a bit of data, in one piece. However, I didn't want it to look overwhelming or boring to the viewer. Thus I consolidated colours, kept a tight dark border (to draw the viewer in), and placed the plots in a way that would pull the eye down and zig-zagged across the graphic. I used simple rectangular shapes (box-plots, bargraph, tile maps) where possible. I also used quotes that were relevant to the graphs, near them visually. (While lengthy, I think the use of font and the dark purple colour, make them less distracting.)
-- Contextualizing your data: I hoped to further contextualize the data within the graphic, through quotes, the pun in the titles, the images of the donkey and elephant.
-- Primary message: I wanted to get across the message that the Democratic party has, in recent history, been better for the economy and financial welfare of the American people.
-- Accessibility: To keep in mind accessibility, I tried to keep in mind the contrast of the text, background, and foreground.
-- DEI lens: While perhaps not overly explicit, my party biases will have definitely come into play when creating the infographic. Thus, I tried to keep the subject matter non-accusatory and factual - getting non-inflammatory quotes - as well as keeping in mind other extrinsic events that may have and an impact on the economy.
+-   Themes: in R, I used a minimal, light, or void theme. Due to the background removal function in Canva - this was necessary in order to avoid the blurring of the wanted plotted images. Thus, using these themes made it easier to remove the background - and were reillustrated in Canva using line and text elements.
+-   General design: I wanted to create a cohesive design, allowing multiple visualizations, and quite a bit of data, in one piece. However, I didn't want it to look overwhelming or boring to the viewer. Thus I consolidated colours, kept a tight dark border (to draw the viewer in), and placed the plots in a way that would pull the eye down and zig-zagged across the graphic. I used simple rectangular shapes (box-plots, bargraph, tile maps) where possible. I also used quotes that were relevant to the graphs, near them visually. (While lengthy, I think the use of font and the dark purple colour, make them less distracting.)
+-   Contextualizing your data: I hoped to further contextualize the data within the graphic, through quotes, the pun in the titles, the images of the donkey and elephant.
+-   Primary message: I wanted to get across the message that the Democratic party has, in recent history, been better for the economy and financial welfare of the American people.
+-   Accessibility: To keep in mind accessibility, I tried to keep in mind the contrast of the text, background, and foreground.
+-   DEI lens: While perhaps not overly explicit, my party biases will have definitely come into play when creating the infographic. Thus, I tried to keep the subject matter non-accusatory and factual - getting non-inflammatory quotes - as well as keeping in mind other extrinsic events that may have and an impact on the economy.
 
 ## Citations
 
@@ -328,4 +330,3 @@ Rockfeller Institute of Government. (n.d.). Balance of payments portal. Rockefel
 Tax Policy Center. (2023, August 24). State and local general expenditures per capita. Tax Policy Center. Retrieved March 14, 2025, from https://taxpolicycenter.org/statistics/state-and-local-general-expenditures-capita
 
 World Bank. (2025, March 14). GDP growth (annual %) - United States. The World Bank. Retrieved from https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.ZG?locations=US
-
