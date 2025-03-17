@@ -188,7 +188,7 @@ welfare_state_clean_1 <- welfare_state_clean_1 %>%
 
 ### Visualization 1
 
-![](gdp.jpg){width="400"} 
+![](gdp.jpg){width="400"}
 
 Below is the code used to create the graph:
 
@@ -235,7 +235,7 @@ I wanted to create a visualization of annual GDP growth rate (%), highlighting t
 
 ### Visualization 2
 
-![](tile_gdp.jpg){width="400"} 
+![](tile_gdp.jpg){width="400"}
 
 Below is the code used to create the graph:
 
@@ -259,7 +259,7 @@ This tile visual was used to create a simple but effective "map" which could als
 
 ### Visualization 3
 
-![](welfare_state.jpg){width="400"} 
+![](welfare_state.jpg){width="400"}
 
 Below is the code used to create the graph:
 
@@ -280,7 +280,7 @@ In order to add some nuance on where this welfare spending was being filtered to
 
 ### Visualization 4
 
-![](give.jpg){width="300"} ![](take.jpg){width="300"} 
+![](give.jpg){width="300"} ![](take.jpg){width="300"}
 
 Below is the code used to create the graphs:
 
