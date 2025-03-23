@@ -194,41 +194,41 @@ Below is the code used to create the graph:
 
 ```{r eval=FALSE}
 gdp_line_graph <- ggplot(data = gdp_clean, aes(x = year, y = gdp_growth)) +
-  theme_minimal()+
+  theme_void()+
   theme(
     axis.title.x = element_blank() ) +
-  geom_rect(aes(xmin = 1997, xmax = 2000, ymin = -Inf, ymax = Inf), fill = 'lightskyblue', alpha=0.5) +
-  geom_rect(aes(xmin = 2000, xmax = 2008, ymin = -Inf, ymax = Inf), fill = 'lightcoral', alpha=0.5) +
-  geom_rect(aes(xmin = 2008, xmax = 2016, ymin = -Inf, ymax = Inf), fill = 'lightskyblue', alpha=0.5) +
-  geom_rect(aes(xmin = 2016, xmax = 2020, ymin = -Inf, ymax = Inf), fill = 'lightcoral', alpha=0.5) +
-  geom_rect(aes(xmin = 2020, xmax = 2024, ymin = -Inf, ymax = Inf), fill = 'lightskyblue', alpha=0.5) +
-  geom_rect(aes(xmin = 2024, xmax = 2025, ymin = -Inf, ymax = Inf), fill = 'lightcoral', alpha=0.5) +
-  geom_vline(xintercept = 2007, color = "firebrick", size = 0.4, linetype = "longdash") +
-  geom_vline(xintercept = 2007.25, color = "firebrick", size = 0.25, linetype = "longdash") +
-  geom_vline(xintercept = 2007.5, color = "firebrick", size = 0.4, linetype = "longdash") +
-  geom_vline(xintercept = 2007.75, color = "firebrick", size = 0.25, linetype = "longdash") +
-  geom_vline(xintercept = 2008, color = "firebrick", size = 0.4, linetype = "longdash") +
-  geom_vline(xintercept = 2008.25, color = "firebrick", size = 0.25, linetype = "longdash")  +
-  geom_vline(xintercept = 2008.5, color = "firebrick", size = 0.4, linetype = "longdash")  +
-  geom_vline(xintercept = 2008.75, color = "firebrick", size = 0.25, linetype = "longdash") +
-  geom_vline(xintercept = 2009, color = "firebrick", size = 0.4, linetype = "longdash") +
-  geom_vline(xintercept = 2009.25, color = "firebrick", size = 0.25, linetype = "longdash") +
-  geom_vline(xintercept = 2009.5, color = "firebrick", size = 0.4, linetype = "longdash") +
-  geom_vline(xintercept = 2009.75, color = "firebrick", size = 0.25, linetype = "longdash") +
-  geom_vline(xintercept = 2010, color = "firebrick", size = 0.4, linetype = "longdash") +
+  geom_rect(aes(xmin = 1997, xmax = 2000, ymin = -Inf, ymax = Inf), fill = '#D3F4FF', alpha=0.5) +
+  geom_rect(aes(xmin = 2000, xmax = 2008, ymin = -Inf, ymax = Inf), fill = '#FFBCBC', alpha=0.5) +
+  geom_rect(aes(xmin = 2008, xmax = 2016, ymin = -Inf, ymax = Inf), fill = '#D3F4FF', alpha=0.5) +
+  geom_rect(aes(xmin = 2016, xmax = 2020, ymin = -Inf, ymax = Inf), fill = '#FFBCBC', alpha=0.5) +
+  geom_rect(aes(xmin = 2020, xmax = 2024, ymin = -Inf, ymax = Inf), fill = '#D3F4FF', alpha=0.5) +
+  geom_rect(aes(xmin = 2024, xmax = 2025, ymin = -Inf, ymax = Inf), fill = '#FFBCBC', alpha=0.5) +
+  geom_vline(xintercept = 2007, color = "#808080", size = 0.4, linetype = "longdash") +
+  geom_vline(xintercept = 2007.25, color = "#808080", size = 0.25, linetype = "longdash") +
+  geom_vline(xintercept = 2007.5, color = "#808080", size = 0.4, linetype = "longdash") +
+  geom_vline(xintercept = 2007.75, color = "#808080", size = 0.25, linetype = "longdash") +
+  geom_vline(xintercept = 2008, color = "#808080", size = 0.4, linetype = "longdash") +
+  geom_vline(xintercept = 2008.25, color = "#808080", size = 0.25, linetype = "longdash")  +
+  geom_vline(xintercept = 2008.5, color = "#808080", size = 0.4, linetype = "longdash")  +
+  geom_vline(xintercept = 2008.75, color = "#808080", size = 0.25, linetype = "longdash") +
+  geom_vline(xintercept = 2009, color = "#808080", size = 0.4, linetype = "longdash") +
+  geom_vline(xintercept = 2009.25, color = "#808080", size = 0.25, linetype = "longdash") +
+  geom_vline(xintercept = 2009.5, color = "#808080", size = 0.4, linetype = "longdash") +
+  geom_vline(xintercept = 2009.75, color = "#808080", size = 0.25, linetype = "longdash") +
+  geom_vline(xintercept = 2010, color = "#808080", size = 0.4, linetype = "longdash") +
   geom_vline(xintercept = 2001, 
-             color = "firebrick", size = 0.5, linetype = "longdash")+
-  geom_line() +
-  geom_vline(xintercept = 2020, color = "firebrick", size = 0.4, linetype = "longdash") +
-  geom_vline(xintercept = 2020.25, color = "firebrick", size = 0.25, linetype = "longdash") +
-  geom_vline(xintercept = 2020.5, color = "firebrick", size = 0.4, linetype = "longdash") +
-  geom_vline(xintercept = 2020.75, color = "firebrick", size = 0.25, linetype = "longdash") +
-  geom_vline(xintercept = 2021, color = "firebrick", size = 0.4, linetype = "longdash") +
-  geom_vline(xintercept = 2021.25, color = "firebrick", size = 0.25, linetype = "longdash") +
-  geom_vline(xintercept = 2021.5, color = "firebrick", size = 0.4, linetype = "longdash") +
-  geom_vline(xintercept = 2021.75, color = "firebrick", size = 0.25, linetype = "longdash") +
-  geom_vline(xintercept = 2022, color = "firebrick", size = 0.4, linetype = "longdash") +
-  ylab("GDP Growth (%)")
+             color = "#808080", size = 0.5, linetype = "longdash") +
+  geom_vline(xintercept = 2020, color = "#808080", size = 0.4, linetype = "longdash") +
+  geom_vline(xintercept = 2020.25, color = "#808080", size = 0.25, linetype = "longdash") +
+  geom_vline(xintercept = 2020.5, color = "#808080", size = 0.4, linetype = "longdash") +
+  geom_vline(xintercept = 2020.75, color = "#808080", size = 0.25, linetype = "longdash") +
+  geom_vline(xintercept = 2021, color = "#808080", size = 0.4, linetype = "longdash") +
+  geom_vline(xintercept = 2021.25, color = "#808080", size = 0.25, linetype = "longdash") +
+  geom_vline(xintercept = 2021.5, color = "#808080", size = 0.4, linetype = "longdash") +
+  geom_vline(xintercept = 2021.75, color = "#808080", size = 0.25, linetype = "longdash") +
+  geom_vline(xintercept = 2022, color = "#808080", size = 0.4, linetype = "longdash") +
+  ylab("GDP Growth (%)") +
+  geom_line(size = 1.3)
 ```
 
 I wanted to create a visualization of annual GDP growth rate (%), highlighting the differences when either the Republican or Democratic party was in power. This chart allowed for that time comparison to be made - while creating a stark background contrast to represent the presidential party at the time. I utilised a light blue and light coral red to signify the presidential party of the eras - coherent with the rest of my visualizations. This was because these colours are representative of the parties and the average American viewer will have a preconceived significance as to what this colour represents within the context of this infographic. Finally, I used red dotted lines to mark significant events that might have had an impact on the economy, extrinsic to the presidency.
@@ -240,19 +240,20 @@ I wanted to create a visualization of annual GDP growth rate (%), highlighting t
 Below is the code used to create the graph:
 
 ```{r eval=FALSE}
-
 welfare_plot <- ggplot(welfare_clean_1) +
   geom_rect(aes(xmin = 0, xmax = 1, ymin = 0, ymax = 1, fill = welfare_spend)) +
-  scale_fill_binned(low = "#FFFFFF" , high = "#8100AC", n.breaks = 4, name = "") +
+  scale_fill_binned(low = "#E0A6F3" , high = "#4E0965", n.breaks = 4.5, name = "") +
   facet_geo(~name) +
   theme_void() +
   theme(
     strip.text = element_blank(),
-    axis.title = element_blank()
+    axis.title = element_blank(),
+    legend.text = element_blank()
   ) +
   geom_text(aes(x = 0.5, y = 0.5, label = abbreviation),
-            size = 3.5, 
-            color = "black")
+            size = 7.5, 
+            color = "white",
+            family = "sans")
 ```
 
 This tile visual was used to create a simple but effective "map" which could also hold per capita welfare spending data. I binned the scale for the spending data - in order to simplify the visual comparison (and because there were few states that were at the extreme of the high-low spending category - making a complex colour chart unnecessary in this instance.) I also used purple colours which I felt would stand out from the background - while still being overall cohesive to the piece. (Purple was used as it is the blend of red and blue, as this visualization doesn't show 2024 political party.)
@@ -264,7 +265,20 @@ This tile visual was used to create a simple but effective "map" which could als
 Below is the code used to create the graph:
 
 ```{r eval=FALSE}
-welfare_state_spend_plot <- welfare_state_clean_1 %>%
+
+# Calculate the mean spending for each sector by Democrats
+dem_means <- welfare_state_clean_1 %>%
+  filter(election_status == "D") %>%
+  group_by(spend_sector) %>%
+  summarize(mean_value = mean(value, na.rm = TRUE)) %>%
+  arrange(-desc(mean_value))
+
+# Create a factor with levels ordered by Democratic means
+ordered_sectors <- factor(dem_means$spend_sector, levels = dem_means$spend_sector)
+
+# Create the plot with ordered sectors
+welfare_state_spend_plot_1 <- welfare_state_clean_1 %>%
+  mutate(spend_sector = factor(spend_sector, levels = dem_means$spend_sector)) %>%
   ggplot(aes(x = spend_sector, y = value, fill = election_status)) +
   geom_boxplot(outlier.shape = NA) +
   scale_fill_manual(values = election_palette) +
@@ -273,7 +287,8 @@ welfare_state_spend_plot <- welfare_state_clean_1 %>%
     legend.position = "none"
   ) +
   ylab("Per Capita Welfare Spending ($)") +
-  xlab("Sector")
+  xlab("Sector") +
+  coord_flip()
 ```
 
 In order to add some nuance on where this welfare spending was being filtered to - I decided to add another visualization on this point. Thus, I added a plot containing a series of boxplots, on welfare spending by sector and 2024 presidential party affiliation. Due to the difference in the number of Democratic and Republican states, this felt like the best way to get the information across in an un-biased manner, while still representing all states across the country. The colours are cohesive to the previous plot, and are still visually pleasing in a way that navy and bright red would not be. I used Poppins (titles, axis, benchmarks) fonts for all visualizations. I felt that it was easily readable, eyecatching but not distracting, created clear seperations of the visualizations, and worked with the overall tone of the piece.
@@ -298,6 +313,7 @@ Below is the code used to create the graphs:
   geom_text(aes(label = scales::dollar(pcap_balance)), hjust = 1.2, color = "white")
 
   pcap_give_graph <- ggplot(data = pcap_give_data, aes(x = name, y = pcap_balance, fill = election_status)) +
+  ylim(c(-15187,0)) +
   scale_fill_manual(values = election_palette) +
   geom_col() +
   theme_light() + 
@@ -310,7 +326,7 @@ Below is the code used to create the graphs:
   geom_text(aes(label = scales::dollar(pcap_balance)), hjust = 0, color = "white")
 ```
 
-Finally, I wanted to create a "winged" bar graph of per capita balance of payments of the top 10 "taking" and the top 10 "giving" states. The colour of the bars is by presidential party affiliation. The "giving" states are on the left wing and are represented by negative dollars (as the formula is amount used *less* amount given), thus if the amount given is greater than the amount spent the per capita balance of payments will be negative. The "taking" states are on the right wing. I do wonder if I should change the scale, to be more accurate to each other, as well as emphasize that the negative dollars mean that it provides more than it uses?
+Finally, I wanted to create a "winged" bar graph of per capita balance of payments of the top 10 "taking" and the top 10 "giving" states. The colour of the bars is by presidential party affiliation. The "giving" states are on the left wing and are represented by negative dollars (as the formula is amount used *less* amount given), thus if the amount given is greater than the amount spent the per capital balance of payments will be negative. The "taking" states are on the right wing. I added a y limit on the "giving" graph in order to scale the graph appropriately to the "receiving" graph.
 
 ## Design Elements
 
