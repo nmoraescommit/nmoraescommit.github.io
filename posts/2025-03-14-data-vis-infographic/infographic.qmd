@@ -27,15 +27,7 @@ fig-align: center
 
 ## 2024 United States Presidential Elections
 
-After the nail-biting months, prior to the 2024 presidential elections, where I spent (what felt like) every other moment glued to the polls, news, and social media, the results of 2024 elections flooded in through the aforementioned channels. While the votes were being called, the AP News United States Map went through a metamorphosis where insignificant dots, then counties, then states, bled red. I remember feeling detached - thinking "Did no one remember his previous 4 years?"
-
-While news pundits and reporters, friends and family, tried making sense of the quantified sentiments of the American people - and important social justice issues were bought to the fore (racism, misogyny, homophobia, classism, etc.) - swathes of Trump supporters insisted "It's the economy, stupid!"
-
-For my final data visualization piece/art therapy substitute, for the EDS 240: Data Visualization and Communication course, I wanted to create an infographic that would highlight the absurdity of this claim.
-
-#### Further Background
-
-Initially, I had wanted to visualize socio-economic characteristics of American states by 2024 party affiliation. Further research has shown that the social welfare aspects are better analyzed through the lenses of race, gender, and income status - rather then by voting party. Therefore, I narrowed my field of focus to finances of states as well as state welfare spending.
+I had wanted to visualize socio-economic characteristics of American states by 2024 party affiliation. Further research has shown that the social welfare aspects are better analyzed through the lenses of race, gender, and income status - rather then by voting party. Therefore, I narrowed my field of focus to finances of states as well as state welfare spending.
 
 ## Final Visualization
 
