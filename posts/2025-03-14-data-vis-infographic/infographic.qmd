@@ -29,7 +29,7 @@ fig-align: center
 
 I had wanted to visualize socio-economic characteristics of American states by 2024 party affiliation. Further research has shown that the social welfare aspects are better analyzed through the lenses of race, gender, and income status - rather then by voting party. Therefore, I narrowed my field of focus to finances of states as well as state welfare spending.
 
-## Final Visualization
+## Final Visualization 
 
 ![](Infographic.jpg)
 
